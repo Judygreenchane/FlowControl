@@ -81,12 +81,10 @@ namespace FlowControl
             Int32.TryParse(Console.ReadLine(), out int noOfPeople);              // If the user enter any other type other than integer,the variable noOfPeople will get a 0 value.
             for (int i = 1; i <= noOfPeople; i++)
             {
-               // Console.Write($"Enter Age of person {i} : ");
-                // Int32.TryParse(Console.ReadLine(), out int age);
+               
                 uint age = Util.AskForUInt($"Enter Age of person {i} : ");
-                if ((age < 0) || (age > 150)) 
-                    totalCost += 0;
-                else if ((age < 5) || (age > 100))
+                
+                if ((age < 5) || (age > 100))
                     totalCost += 0;
                 else   if (age < 20)
                     totalCost += 80;
