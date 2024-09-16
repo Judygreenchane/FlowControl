@@ -1,4 +1,5 @@
 ﻿
+using FlowControl.Helper;
 using System.Text.RegularExpressions;
 namespace FlowControl
 {
@@ -7,12 +8,13 @@ namespace FlowControl
         static bool programQuit = false;
         static void Main(string[] args)
         {
+            
             Console.WriteLine(" You have reached a Menu! \n Enter any number given below to navigate through the options");
-            while (programQuit == false)
+            do
             {
                 MainMenu();
-            }
-            //Console.WriteLine("Hello, World!");
+            } while (programQuit == false);
+            
         }
         static void MainMenu()
         {
@@ -56,16 +58,12 @@ namespace FlowControl
         }
         static void CheckPensionerOrYouth()
         {
-            // Here considering age 0 as a valid value for babies.
+           
 
-            Console.WriteLine("Enter your age");
-            string age = Console.ReadLine();
-            Int32.TryParse(age, out int int_age);                       // Here can't completely predict whether user entered 0 or a non integer value. So next step is needed.
-            if (!Regex.IsMatch(age, @"^\d+$"))                          // To check whether the user entered anything other than integer
-                Console.WriteLine("Invalid Age.");
-            else if ((int_age < 0) || (int_age > 150))                    // To prevent entering wrong ages.
-                Console.WriteLine("Invalid Age.");
-            else if ((int_age < 5) || (int_age > 100)) 
+            uint int_age = Util.AskForUInt($"Enter your age : ");
+            
+             
+            if ((int_age < 5) || (int_age > 100)) 
                 Console.WriteLine("It is free for you.No need to pay");
                 else if (int_age < 20)
                 Console.WriteLine("Your Price : SEK 80");
@@ -83,9 +81,10 @@ namespace FlowControl
             Int32.TryParse(Console.ReadLine(), out int noOfPeople);              // If the user enter any other type other than integer,the variable noOfPeople will get a 0 value.
             for (int i = 1; i <= noOfPeople; i++)
             {
-                Console.Write($"Enter Age of person {i} : ");
-                Int32.TryParse(Console.ReadLine(), out int age);
-                if ((age < 0) || (age > 150))
+               // Console.Write($"Enter Age of person {i} : ");
+                // Int32.TryParse(Console.ReadLine(), out int age);
+                uint age = Util.AskForUInt($"Enter Age of person {i} : ");
+                if ((age < 0) || (age > 150)) 
                     totalCost += 0;
                 else if ((age < 5) || (age > 100))
                     totalCost += 0;
