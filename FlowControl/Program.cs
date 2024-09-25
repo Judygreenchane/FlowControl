@@ -58,21 +58,42 @@ namespace FlowControl
         }
         static void CheckPensionerOrYouth()
         {
-           
 
-            uint int_age = Util.AskForUInt($"Enter your age : ");
             
+          
+            
+            switch (GetPrice())
+            {
+                case 0: 
+                        Console.WriteLine("It is free for you.No need to pay");
+                        break;
+                case 80: 
+                        Console.WriteLine("Your Price : SEK 80");
+                        break;
+                case 90:
+                        Console.WriteLine("Pensioner  Price : SEK 90");
+                        break;
+                case 120:
+                    Console.WriteLine("Pensioner  Price : SEK 120");
+                    break;
+
+            }
              
-            if ((int_age < 5) || (int_age > 100)) 
-                Console.WriteLine("It is free for you.No need to pay");
-                else if (int_age < 20)
-                Console.WriteLine("Your Price : SEK 80");
+          
+
+
+        }
+        static int GetPrice()
+        {
+            uint int_age = Util.AskForUInt($"Enter  age : ");
+            if ((int_age < 5) || (int_age > 100))
+                return 0;
+            else if (int_age < 20)
+                return 80;
             else if (int_age > 64)
-                Console.WriteLine("Pensioner  Price : SEK 90");
+                return 90;
             else
-                Console.WriteLine("Standard  Price  : SEK 120");
-
-
+                return 120;
         }
         static void CalculateTotalCost()
         {
@@ -81,17 +102,10 @@ namespace FlowControl
             Int32.TryParse(Console.ReadLine(), out int noOfPeople);              // If the user enter any other type other than integer,the variable noOfPeople will get a 0 value.
             for (int i = 1; i <= noOfPeople; i++)
             {
+                Console .Write($" person {i} : ");
+               // uint age = Util.AskForUInt($"Enter Age  : ");
+                totalCost+=  GetPrice();
                
-                uint age = Util.AskForUInt($"Enter Age of person {i} : ");
-                
-                if ((age < 5) || (age > 100))
-                    totalCost += 0;
-                else   if (age < 20)
-                    totalCost += 80;
-                else if (age > 64)
-                    totalCost += 90;
-                else
-                    totalCost += 120;
             }
             Console.WriteLine($"Number of people                     :  {noOfPeople}");
             Console.WriteLine($"Total cost for the entire party      :  {totalCost}");

@@ -13,7 +13,7 @@
                  
                 if (string.IsNullOrWhiteSpace(answer)) 
                     {
-                    Console.WriteLine($"You must enter a valid {prompt}");
+                    Console.WriteLine($"You must enter a valid age");
                 }
                 else
                 {
@@ -30,9 +30,15 @@
                 string input=AskForString(prompt);
                 if(uint.TryParse(input, out uint result))
                 {
+                    if(result <= 150)
                     return result;
+                    else
+                    Console.WriteLine($"You must enter a valid age in between 0 and 150");
+
                 }
-            }while(true);
+                else
+                    Console.WriteLine($"You must enter a valid positive age in between 0 and 150");
+            } while(true);
         }
     }
 }
